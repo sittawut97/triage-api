@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: triage-api
+    env: java
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -Dspring.profiles.active=render -jar target/triage-api-1.0.0.jar
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        value: jdbc:sqlserver://172.28.130.166:1433;databaseName=TriageNew;encrypt=false;trustServerCertificate=true
+      - key: DB_USERNAME
+        value: sa
+      - key: DB_PASSWORD
+        sync: false  # จะตั้งค่าใน dashboard
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8080

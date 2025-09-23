@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: triage-api
+  
+  # Database configuration for Railway
+  datasource:
+    url: ${DATABASE_URL:jdbc:sqlserver://172.28.130.166:1433;databaseName=TriageNew;encrypt=false;trustServerCertificate=true}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:your_password}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  
+  # JPA configuration
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+        format_sql: false
+  
+  # Server configuration
+  server:
+    port: ${PORT:8080}
+    servlet:
+      context-path: /
+  
+# Logging configuration
+logging:
+  level:
+    com.triage: INFO
+    org.springframework: WARN
+    org.hibernate: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# Management endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
