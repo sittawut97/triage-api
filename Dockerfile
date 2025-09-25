@@ -1,5 +1,5 @@
 # ใช้ Maven image สำหรับ build stage
-FROM maven:3.9.4-openjdk-17-slim AS build
+FROM maven:3.9.6-eclipse-temurin-17-alpine AS build
 
 # ตั้งค่า working directory
 WORKDIR /app
