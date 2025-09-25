@@ -21,7 +21,7 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # คัดลอก JAR file จาก build stage
-COPY --from=build /app/target/triage-api-1.0.0.jar app.jar
+COPY --from=build /app/target/triage-api-0.0.1-SNAPSHOT.jar app.jar
 
 # สร้าง user ที่ไม่ใช่ root เพื่อความปลอดภัย (Alpine Linux)
 RUN addgroup -S spring && adduser -S spring -G spring
