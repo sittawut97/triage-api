@@ -14,8 +14,8 @@ COPY src ./src
 # Build application
 RUN mvn clean package -DskipTests -B
 
-# Production stage - ใช้ OpenJDK runtime
-FROM openjdk:17-jre-slim
+# Production stage - ใช้ Eclipse Temurin JRE
+FROM eclipse-temurin:17-jre-alpine
 
 # ตั้งค่า working directory
 WORKDIR /app
@@ -23,8 +23,8 @@ WORKDIR /app
 # คัดลอก JAR file จาก build stage
 COPY --from=build /app/target/triage-api-1.0.0.jar app.jar
 
-# สร้าง user ที่ไม่ใช่ root เพื่อความปลอดภัย
-RUN addgroup --system spring && adduser --system spring --ingroup spring
+# สร้าง user ที่ไม่ใช่ root เพื่อความปลอดภัย (Alpine Linux)
+RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
 # Expose port 8080
