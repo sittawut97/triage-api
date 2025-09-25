@@ -5,8 +5,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # คัดลอก Maven wrapper และ pom.xml
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+# COPY .mvn/ .mvn
+# COPY mvnw pom.xml ./
+COPY pom.xml ./
+RUN mvn clean install
 
 # Download dependencies
 RUN ./mvnw dependency:go-offline
